@@ -13,7 +13,7 @@ import styles from "./styles";
 import Card from "../../components/Card";
 import Input from "../../components/Input";
 
-const StartGame = () => {
+const StartGame = ({onStartGame}) => {
   const [value, setValue] = useState("");
   const [confirm, setConfirm] = useState(false);
   const [selectedNumber, setSelectedNumber] = useState("");
@@ -29,7 +29,7 @@ const StartGame = () => {
   
   const handleConfirmation = () => {
     const newValue = parseInt(value);
-    if (newValue === NaN || newValue <= 0 || newValue > 99) return;
+    if (isNaN(newValue) === NaN || newValue <= 0 || newValue > 99) return;
 
       setConfirm(true);
       setSelectedNumber(newValue);
@@ -76,8 +76,10 @@ const StartGame = () => {
             <Text style={{color:"white"}}>Your Number is</Text> 
             <Text>{selectedNumber}</Text>
             <View>
-              <Button title="Start Game" color={"black"}
-               onPress={() =>console.log("comenzar juego")}/>
+              <Button 
+               title="Start Game" 
+               color={"black"}
+               onPress={() => onStartGame(selectedNumber)}/>
             </View>
           </Card>
         )}
